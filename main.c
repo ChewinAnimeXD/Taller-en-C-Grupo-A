@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include "ctype.h"
 
-void primeNumbers(){
+void primeNumbers(int numeroFinal){
+    int contador;
+    int i;
+    int primo;
+    int final = numeroFinal;
+
+    for (i = final; i > 0; i--) {
+        primo = 1;
+        contador = 2;
+        while (contador <= i / 2 && primo) {
+            if (i % contador == 0)
+                primo = 0;
+            contador++;
+        }
+        if (primo)
+            printf("%d ", i);
+    }
     printf("NUMEROS PRIMOS");
 }
 void egomaniacNumber(){
@@ -21,6 +37,24 @@ void calcFibonacci(){
     printf("unaa secuencia de palabas Fibonacci ");
 }
 void testString(){
+    char prue[] = {'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O'};
+    int contador = 0;
+    int total = 0;
+    int VectorSuma[sizeof(prue) - 1];
+
+    for (int i = 0; i <= sizeof(prue) - 1; ++i) {
+        contador++;
+        if (prue[i] == 'O') {
+            VectorSuma[i] = contador;
+        } else if (prue[i] == 'X')
+            contador = 0;
+        VectorSuma[i] = contador;
+    }
+    for (int j = 0; j <= sizeof(prue) - 1; ++j) {
+        printf("%d ", VectorSuma[j]);
+        total = total + VectorSuma[j];
+    }
+    printf("\n------El total de la calificacion es: %d------\n", total);
     printf("PRUEBA CADENA ");
 }
 void stop()
@@ -47,7 +81,15 @@ void mainMenu(){
         fflush(stdin);
         switch(option){
             case '1' :
-                primeNumbers();
+                int numP1;
+                printf("Digite el numero limite !\n");
+                scanf("%i", &numP1);
+                if (numP1>0){
+                    primeNumbers(numP1);
+                }
+                else{
+                    printf("Error tiene que Digitar un Numero mayor a 1");
+                }
                 stop();
                 break;
             case '2' :
